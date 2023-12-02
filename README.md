@@ -49,12 +49,36 @@ API_PORT=8080 python api/main.py
     ```bash
     docker-compose build
     ```
+
 2. Run the docker container:
 
     ```bash
     docker-compose up
     ```
+
 3. The API will be available at [http://localhost:8000](http://localhost:8000).
+
+## Running on MiniKube
+
+Use the scripts on the `scripts` directory to install minikube and deploy the application on a local Kubernetes cluster.
+
+1. Install minikube and start the cluster:
+
+    ```bash
+    ./scripts/minikube-install.sh
+    ```
+
+2. Deploy the application:
+
+    ```bash
+    ./scripts/minikube-deploy.sh
+    ```
+
+3. Access the NodePort service:
+
+    ```bash
+    ./scripts/minikube-access.sh
+    ```
 
 ## API Endpoints
 

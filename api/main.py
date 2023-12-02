@@ -9,6 +9,10 @@ api_port = int(os.environ.get("API_PORT", "8000"))
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "Python Geospatial Image Processing API"}
+
 app.include_router(router, prefix="/image", tags=["Image"])
 
 if __name__ == "__main__":

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-geospatial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-geospatial
+  template:
+    metadata:
+      labels:
+        app: python-geospatial
+    spec:
+      containers:
+      - name: python-geospatial
+        image: ghcr.io/rcbop/python-geospatial:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: API_PORT
+          value: "8000"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-geospatial-headless-svc
+spec:
+  selector:
+    app: python-geospatial
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-geospatial-nodeport-svc
+spec:
+  selector:
+    app: python-geospatial
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
