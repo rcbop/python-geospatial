@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  api:
+    image: geospatial-image-api:latest
+    container_name: image-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_PORT=8000
